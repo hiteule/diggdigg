@@ -117,6 +117,7 @@ define('DD_BUTTON_GOOGLE1','dd_button_google1');
 define('DD_BUTTON_BUFFER','dd_button_buffer');
 define('DD_BUTTON_PINTEREST','dd_button_pinterest');
 define('DD_BUTTON_FLATTR','dd_button_flattr');
+define('DD_BUTTON_SKYROCK','dd_button_skyrock');
 
 /****************************************
  * Digg Digg Global Display (Start)
@@ -148,6 +149,8 @@ define('DD_GLOBAL_FACEBOOK_OPTION_DEFAULT_THUMB','dd_global_facebook_option_defa
 
 define('DD_GLOBAL_FLATTR_OPTION','dd_global_flattr_option');
 define('DD_GLOBAL_FLATTR_OPTION_UID','dd_global_flattr_option_uid');
+
+define('DD_GLOBAL_SKYROCK_OPTION','dd_global_skyrock_option');
 
 global $ddGlobalConfig; 
 $ddGlobalConfig = array(
@@ -236,7 +239,8 @@ $ddNormalButtons = array(
 		DD_BUTTON_GOOGLE1 => new DD_Google1(),
 		DD_BUTTON_BUFFER => new DD_Buffer(),
 		DD_BUTTON_PINTEREST => new DD_Pinterest(),
-		DD_BUTTON_FLATTR => new DD_Flattr()
+		DD_BUTTON_FLATTR => new DD_Flattr(),
+		DD_BUTTON_SKYROCK => new DD_Skyrock()
 	),
 	DD_NORMAL_BUTTON_FINAL => array()
 );
@@ -332,7 +336,8 @@ $ddFloatButtons = array(
 		DD_BUTTON_GOOGLE1 => new DD_Google1(),
 		DD_BUTTON_BUFFER => new DD_Buffer(),
 		DD_BUTTON_PINTEREST => new DD_Pinterest(),
-		DD_BUTTON_FLATTR => new DD_Flattr()		
+		DD_BUTTON_FLATTR => new DD_Flattr(),	
+		DD_BUTTON_SKYROCK => new DD_Skyrock()
 	),
 	DD_FLOAT_BUTTON_FINAL => array()
 );

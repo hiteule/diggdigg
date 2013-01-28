@@ -117,6 +117,13 @@ $dd_manual_code = array(
 		"Normal" => "dd_flattr_generate('Normal','flattr_username')",
 		"Compact" => "dd_flattr_generate('Compact','flattr_username')"
 	),
+	"Skyrock" => array(
+		"Normal" => "dd_skyrock_generate('Normal')",
+        "Normal (20px)" => "dd_skyrock_generate('Normal (20px)')",
+        "Icon (16px)" => "dd_skyrock_generate('Icon (16px)')",
+        "Icon (24px)" => "dd_skyrock_generate('Icon (24px)')",
+        "Icon (38px)" => "dd_skyrock_generate('Icon (38px)')"
+	)
 );		
 	
 function dd_digg_generate($buttonDesign='Normal'){
@@ -360,6 +367,15 @@ function dd_flattr_generate($buttonDesign='Normal', $uid=''){
     $dd_flattr->constructURL($post_data['link'],$post_data['title'],$buttonDesign,$post_data['id'],false,$globalcfg);
     
 	echo $dd_flattr->finalURL;
+}
+
+function dd_skyrock_generate($buttonDesign='Normal'){
+	$post_data = dd_getPostData();
+    
+    $dd_skyrock = new DD_Skyrock();
+    $dd_skyrock->constructURL($post_data['link'],$post_data['title'],$buttonDesign,$post_data['id'],false);
+    
+	echo $dd_skyrock->finalURL;
 }
 
 function dd_getPostData() {

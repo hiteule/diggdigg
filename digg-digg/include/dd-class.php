@@ -2277,4 +2277,103 @@ class DD_Serpd extends BaseDD{
         parent::BaseDD(self::NAME, self::URL_WEBSITE, self::URL_API, self::BASEURL);
     }    
 }
+
+/******************************************************************************************
+ * 
+ * http://www.skyrock.com
+ *
+ */
+class DD_Skyrock extends BaseDD{
+    var $append_type = 'left_float';
+    var $button_design = 'Normal';
+    var $ajax_left_float = 'on';
+    
+    const NAME = "Skyrock";
+    const URL_WEBSITE = "http://www.skyrock.com";
+    const URL_API = "http://www.skyrock.com/developer/tools.php#share";
+    const DEFAULT_BUTTON_WEIGHT = "99";
+
+    const BASEURL = "<a href=\"http://www.skyrock.com/m/blog/share.php?js=0\" class=\"skysocial-s skyrocksocialshare_VOTE_BUTTON_DESIGN\" title=\"Partager sur Skyrock\" style=\"display:inline-block;text-indent:-999em;overflow:hidden;width:VOTE_WIDTHpx;height:VOTE_HEIGHTpx;background:url(http://share.static.skyrock.net/img/api/skyrocksocialshare_VOTE_BUTTON_DESIGN.png) no-repeat 0 0 transparent;\"><p style=\"display:none;\">Partager sur Skyrock</p></a><script>(function(){var d=document,id='skyrock-fxlebpx'; if(d.getElementById(id)) return;var e=d.createElement('script');e.id=id;e.async=true;e.src='http://share.static.skyrock.net/js/skyrock_social.min.js';d.getElementsByTagName('body')[0].appendChild(e);}());</script>";
+    
+    const OPTION_APPEND_TYPE = "dd_skyrock_appendType";
+    const OPTION_BUTTON_DESIGN = "dd_skyrock_buttonDesign";
+    const OPTION_BUTTON_WEIGHT = "dd_skyrock_button_weight";
+    const OPTION_AJAX_LEFT_FLOAT = "dd_skyrock_ajax_left_float";
+
+    const VOTE_WIDTH = "VOTE_WIDTH";
+    const VOTE_HEIGHT = "VOTE_HEIGHT";
+
+    var $buttonLayout = array(
+        "Normal" => "classic24",
+        "Normal (20px)" => "classic20",
+        "Icon (16px)" => "square16",
+        "Icon (24px)" => "square24",
+        "Icon (38px)" => "square38",
+    );
+
+    var $buttonWithHeight = array(
+        "Normal" => array(
+            'width' => '57',
+            'height' => '24',
+        ),
+        "Normal (20px)" => array(
+            'width' => '57',
+            'height' => '20',
+        ),
+        "Icon (16px)" => array(
+            'width' => '16',
+            'height' => '16',
+        ),
+        "Icon (24px)" => array(
+            'width' => '24',
+            'height' => '24',
+        ),
+        "Icon (38px)" => array(
+            'width' => '38',
+            'height' => '38',
+        ),
+    );
+    
+    var $islazyLoadAvailable = false;
+    var $isEncodeRequired = false;
+    
+    public function DD_Skyrock() {
+        $this->option_append_type = self::OPTION_APPEND_TYPE;
+        $this->option_button_design = self::OPTION_BUTTON_DESIGN;
+        $this->option_button_weight = self::OPTION_BUTTON_WEIGHT;
+        $this->option_ajax_left_float = self::OPTION_AJAX_LEFT_FLOAT;
+        
+        $this->button_weight_value = self::DEFAULT_BUTTON_WEIGHT;
+        
+        parent::BaseDD(self::NAME, self::URL_WEBSITE, self::URL_API, self::BASEURL);
+        
+    }
+
+    public function constructURL($url, $title,$button, $postId, $lazy, $globalcfg = ''){
+        
+        if($this->isEncodeRequired){
+            $title = rawurlencode($title);
+            $url = rawurlencode($url);
+        }
+        
+        $skyrock_source = '';
+        if($globalcfg!=''){
+            $skyrock_source = $globalcfg[DD_GLOBAL_SKYROCK_OPTION][DD_GLOBAL_SKYROCK_OPTION_SOURCE]; 
+        }
+        
+        $this->baseURL = str_replace(self::VOTE_BUTTON_DESIGN, $this->getButtonDesign($button), $this->baseURL);
+        $this->baseURL = str_replace(self::VOTE_WIDTH, $this->getButtonWidth($button), $this->baseURL);
+        $this->baseURL = str_replace(self::VOTE_HEIGHT, $this->getButtonHeight($button), $this->baseURL);
+        
+        $this->constructNormalURL($url, $title,$button, $postId);        
+    }
+
+    public function getButtonWidth($button) {
+        return isset($this->buttonWithHeight[$button]) ? $this->buttonWithHeight[$button]['width'] : 0;
+    }
+
+    public function getButtonHeight($button) {
+        return isset($this->buttonWithHeight[$button]) ? $this->buttonWithHeight[$button]['height'] : 0;
+    }
+}
 ?>
